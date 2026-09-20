@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reyrove Social Media Banners</title>
+    <link rel="icon" type="image/svg+xml" href="fav.svg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a120e;
+            font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #4ade80;
+            font-size: 28px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            color: #8ba38f;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 14px;
+        }
+
+        .banners-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .banner-card {
+            background: #0d1a12;
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid rgba(74, 222, 128, 0.2);
+        }
+
+        .banner-title {
+            color: #4ade80;
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .banner-size {
+            color: #8ba38f;
+            font-size: 14px;
+            font-family: monospace;
+        }
+
+        .btn-download {
+            background: #4ade80;
+            color: #0a120e;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .btn-download:hover {
+            background: #22c55e;
+            transform: scale(1.02);
+        }
+
+        .btn-download:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .banner-preview {
+            margin-top: 16px;
+            display: flex;
+            justify-content: center;
+            background: #0a120e;
+            border-radius: 12px;
+            overflow: auto;
+            padding: 10px;
+        }
+
+        /* Banner base styles - ALL TEXT CENTERED */
+        .banner-base {
+            background: #0a120e;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner-base::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: repeating-linear-gradient(45deg, rgba(74, 222, 128, 0.015) 0px, rgba(74, 222, 128, 0.015) 1px, transparent 1px, transparent 12px);
+            pointer-events: none;
+        }
+
+        .brand-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-circle {
+            width: 48px;
+            height: 48px;
+            background: #000000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .logo-circle svg {
+            width: 42px;
+            height: 42px;
+        }
+
+        .brand-name {
+            font-size: 24px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            color: #4ade80;
+        }
+
+        .brand-name span {
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        .divider {
+            width: 50px;
+            height: 1px;
+            background: #4ade80;
+            opacity: 0.4;
+            margin: 16px auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .tagline {
+            font-size: 22px;
+            font-weight: 350;
+            color: #e5f5e8;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 2;
+            line-height: 1.3;
+            text-align: center;
+        }
+
+        .tagline .highlight {
+            color: #4ade80;
+            font-weight: 450;
+        }
+
+        .tagline-small {
+            font-size: 14px;
+            color: #4ade80;
+            letter-spacing: 1px;
+            margin-top: 8px;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .sub {
+            font-size: 11px;
+            color: #5a7a60;
+            letter-spacing: 2px;
+            margin-top: 12px;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .bottom-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #4ade80, #4ade80, transparent);
+            opacity: 0.3;
+        }
+
+        /* Platform-specific sizes */
+        .banner-twitter .banner-base { width: 1500px; height: 500px; padding: 0 80px; }
+        .banner-linkedin .banner-base { width: 1584px; height: 396px; padding: 0 80px; }
+        .banner-github .banner-base { width: 1280px; height: 320px; padding: 0 60px; }
+        .banner-hugging .banner-base { width: 1280px; height: 320px; padding: 0 60px; }
+        .banner-instagram .banner-base { width: 1080px; height: 566px; padding: 0 60px; }
+        .banner-threads .banner-base { width: 1080px; height: 566px; padding: 0 60px; }
+        .banner-youtube .banner-base { width: 2560px; height: 1440px; padding: 0 120px; }
+        .banner-facebook .banner-base { width: 820px; height: 312px; padding: 0 40px; }
+        .banner-daily .banner-base { width: 1280px; height: 320px; padding: 0 60px; }
+
+        /* YouTube specific */
+        .banner-youtube .brand-name { font-size: 48px; }
+        .banner-youtube .logo-circle { width: 90px; height: 90px; }
+        .banner-youtube .logo-circle svg { width: 82px; height: 82px; }
+        .banner-youtube .tagline { font-size: 44px; }
+        .banner-youtube .tagline-small { font-size: 28px; margin-top: 16px; }
+        .banner-youtube .sub { font-size: 20px; margin-top: 20px; }
+        .banner-youtube .divider { width: 100px; margin: 24px auto; }
+
+        /* Instagram & Threads specific */
+        .banner-instagram .brand-name, .banner-threads .brand-name { font-size: 30px; }
+        .banner-instagram .logo-circle, .banner-threads .logo-circle { width: 60px; height: 60px; }
+        .banner-instagram .logo-circle svg, .banner-threads .logo-circle svg { width: 54px; height: 54px; }
+        .banner-instagram .tagline, .banner-threads .tagline { font-size: 28px; }
+        .banner-instagram .tagline-small, .banner-threads .tagline-small { font-size: 18px; }
+
+        /* Facebook specific */
+        .banner-facebook .brand-name { font-size: 18px; }
+        .banner-facebook .logo-circle { width: 36px; height: 36px; }
+        .banner-facebook .logo-circle svg { width: 32px; height: 32px; }
+        .banner-facebook .tagline { font-size: 14px; }
+        .banner-facebook .tagline-small { font-size: 10px; margin-top: 4px; }
+        .banner-facebook .sub { font-size: 9px; margin-top: 8px; }
+        .banner-facebook .divider { width: 35px; margin: 10px auto; }
+        .banner-facebook .brand-row { gap: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>REYROVE — Computational Textile Designer</h1>
+        <div class="subtitle">social media banners • dark green theme</div>
+        <div class="banners-grid" id="bannersGrid"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script>
+        // SVG Logo
+        const logoSvg = '<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+            '<circle cx="50" cy="50" r="48" fill="#000000"/>' +
+            '<g transform="translate(33, 21)" fill="#4ade80">' +
+            '<rect x="0" y="0" width="3" height="58" rx="1"/>' +
+            '<rect x="6" y="0" width="3" height="58" rx="1"/>' +
+            '<rect x="12" y="0" width="3" height="58" rx="1"/>' +
+            '<rect x="0" y="0" width="3" height="28" rx="1"/>' +
+            '<rect x="6" y="0" width="3" height="28" rx="1"/>' +
+            '<rect x="12" y="0" width="3" height="28" rx="1"/>' +
+            '<rect x="18" y="3" width="3" height="24" rx="1"/>' +
+            '<rect x="24" y="8" width="3" height="18" rx="1"/>' +
+            '<line x1="3" y1="38" x2="20" y2="58" stroke="#4ade80" stroke-width="3" stroke-linecap="round"/>' +
+            '<line x1="9" y1="38" x2="26" y2="58" stroke="#4ade80" stroke-width="3" stroke-linecap="round"/>' +
+            '<line x1="15" y1="38" x2="32" y2="58" stroke="#4ade80" stroke-width="3" stroke-linecap="round"/>' +
+            '</g></svg>';
+
+        const platforms = [
+            { id: 'twitter', name: 'Twitter (X)', size: '1500 × 500 px', icon: '🐦' },
+            { id: 'linkedin', name: 'LinkedIn', size: '1584 × 396 px', icon: '💼' },
+            { id: 'github', name: 'GitHub', size: '1280 × 320 px', icon: '🐙' },
+            { id: 'hugging', name: 'Hugging Face', size: '1280 × 320 px', icon: '🤗' },
+            { id: 'instagram', name: 'Instagram', size: '1080 × 566 px', icon: '📷' },
+            { id: 'threads', name: 'Threads', size: '1080 × 566 px', icon: '🧵' },
+            { id: 'youtube', name: 'YouTube', size: '2560 × 1440 px', icon: '▶️' },
+            { id: 'facebook', name: 'Facebook', size: '820 × 312 px', icon: '📘' },
+            { id: 'daily', name: 'Daily.dev', size: '1280 × 320 px', icon: '📰' }
+        ];
+
+        function generateBannerHTML(platformId) {
+            return `
+                <div class="banner-base">
+                    <div class="brand-row">
+                        <div class="logo-circle">${logoSvg}</div>
+                        <div class="brand-name">REY<span>ROVE</span></div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="tagline">computational <span class="highlight">textile</span> designer</div>
+                    <div class="tagline-small">fabric ⟷ code | polymer ⟷ pixel | loom ⟷ loop</div>
+                    <div class="sub">REYHANEH DANESHDOOST | REYROVE</div>
+                    <div class="bottom-line"></div>
+                </div>
+            `;
+        }
+
+        async function downloadBanner(platformId, platformName) {
+            const card = document.querySelector(`.banner-card[data-platform="${platformId}"]`);
+            const bannerElement = card.querySelector('.banner-base');
+            const btn = card.querySelector('.btn-download');
+            
+            if (!bannerElement) return;
+            
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '⏳ Processing...';
+            btn.disabled = true;
+            
+            try {
+                const canvas = await html2canvas(bannerElement, {
+                    scale: 2,
+                    backgroundColor: '#0a120e',
+                    useCORS: true,
+                    logging: false,
+                    allowTaint: false
+                });
+                
+                const link = document.createElement('a');
+                link.download = `reyrove_banner_${platformId}.jpg`;
+                link.href = canvas.toDataURL('image/jpeg', 0.95);
+                link.click();
+                
+                btn.innerHTML = originalText;
+            } catch (error) {
+                console.error('Error:', error);
+                btn.innerHTML = '❌ Error';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                }, 2000);
+                return;
+            }
+            btn.disabled = false;
+        }
+
+        const container = document.getElementById('bannersGrid');
+        
+        platforms.forEach(platform => {
+            const card = document.createElement('div');
+            card.className = `banner-card banner-${platform.id}`;
+            card.setAttribute('data-platform', platform.id);
+            
+            card.innerHTML = `
+                <div class="banner-title">
+                    <span>${platform.icon} ${platform.name}</span>
+                    <span class="banner-size">${platform.size}</span>
+                    <button class="btn-download" data-platform="${platform.id}">⬇ Download JPG</button>
+                </div>
+                <div class="banner-preview">
+                    ${generateBannerHTML(platform.id)}
+                </div>
+            `;
+            
+            container.appendChild(card);
+        });
+
+        document.querySelectorAll('.btn-download').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const platformId = btn.getAttribute('data-platform');
+                const platform = platforms.find(p => p.id === platformId);
+                if (platform) {
+                    downloadBanner(platformId, platform.name);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

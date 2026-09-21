@@ -1,4 +1,4 @@
-# Reyrove Social Media Banners
+# Social Media Banners
 
 Social media banner templates for Computational Textile Designer Reyrove. Dark green theme. Ready to download for all major platforms.
 
